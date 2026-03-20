@@ -1,0 +1,4 @@
+[submodule "fonts"]
+	path = fonts
+	url = git@github.com:ren-lingyu/resume-template.git
+	branch = fonts
