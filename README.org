@@ -3,7 +3,7 @@
 #+OPTIONS: toc:2 num:nil
 
 * 项目说明
-本项目是一个简历 \( \LaTex \) 模板, fork 自 [[https://github.com/Boese0601/Curriculum-Vitae-Latex]], 进行了简化, 移除了硬编码的路径. 
+本项目是一个简历 LaTeX 模板, fork 自 [[https://github.com/Boese0601/Curriculum-Vitae-Latex]], 进行了简化, 移除了硬编码的路径. 
 
 * 目录结构
 #+begin_src text
