@@ -5,7 +5,7 @@
 # 根目录文件白名单
 !.gitignore
 !.gitsubmodules
-!README.md
+!README.org
 !LICENSE
 !fonts
 
