@@ -1,0 +1,150 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{resume}[2026/03/28]
+
+% Global settings
+\setlength{\parindent}{0pt} % Disable paragraph indentation globally
+
+% Required packages
+% 基础设置与字体
+\RequirePackage{xeCJK}        % CJK 字体支持
+\RequirePackage{xltxtra}      % XeTeX 额外功能
+\RequirePackage{fontspec}     % 字体管理
+\RequirePackage{fontawesome}  % Font Awesome 图标
+
+% 超链接与URL
+\RequirePackage{hyperref}     % 超链接支持
+\hypersetup{hidelinks}        % 隐藏链接颜色
+\RequirePackage{url}          % URL 处理
+\urlstyle{tt}                 % 使用等宽字体显示 URL
+
+% 条件命令与列表
+\RequirePackage{xifthen}      % 条件命令支持
+\RequirePackage{enumitem}     % 自定义列表
+% \RequirePackage{paralist}     % 紧凑列表支持
+
+% 页面布局与图形
+\RequirePackage{graphicx}     % 图形支持
+\RequirePackage{epstopdf, epsfig} % EPS 转 PDF 支持
+\RequirePackage{subfigure}    % 子图支持
+\RequirePackage{tabularx}     % 自动调整表格列宽
+\RequirePackage{booktabs}     % 表格线条
+\RequirePackage{float}        % 浮动体支持
+
+% 数学与符号
+\RequirePackage{amsmath, amsfonts, bm, mathrsfs, amssymb} % 数学公式支持
+\RequirePackage{upgreek}      % 希腊字母支持
+\RequirePackage{mhchem}[version=4] % 化学公式支持
+
+% 引用与文献管理
+\RequirePackage{cite}         % 引用支持
+\RequirePackage[numbers]{natbib} % 引用样式
+
+% 标题与章节格式
+\RequirePackage{titlesec}     % 章节标题格式
+\RequirePackage[super]{nth}   % 序号上标支持
+
+% 设置页面尺寸
+\RequirePackage[a4paper,left=0.8in,right=0.8in,top=0.70in,bottom=0.55in,nohead]{geometry} % 页面布局
+
+% 进度条与排版支持
+\RequirePackage{progressbar}  % 进度条支持
+\RequirePackage{setspace}     % 行距控制
+\RequirePackage{calc}         % 计算支持
+
+\setlist{noitemsep} % removes spacing from items but leaves space around the whole list
+%\setlist{nosep} % removes all vertical spacing within and around the list
+\setlist[itemize]{topsep=0.25em, leftmargin=1.5pc}
+\setlist[enumerate]{topsep=0.25em, leftmargin=1.5pc}
+
+% Section Formatting
+\titleformat{\section}
+  {\Large\scshape\raggedright}
+  {}{0em}
+  {}
+  [\titlerule]
+\titlespacing*{\section}{0cm}{*1.8}{*1.8}
+
+\titleformat{\subsection}
+  {\large\raggedright}
+  {}{0em}
+  {}
+\titlespacing*{\subsection}{0cm}{*1.8}{*0.6}
+
+% Custom commands for résumé structure
+\newcommand{\datedsection}[2]{%
+  \section[#1]{#1 \hfill #2}% 添加日期到section标题
+}
+
+\newcommand{\datedsubsection}[2]{%
+  \subsection[#1]{#1 \hfill #2}% 添加日期到subsection标题
+}
+
+\newcommand{\datedline}[2]{%
+  {\par #1 \hfill #2 \par}% 以日期对齐的行
+  % \vspace{0.85ex}
+}
+
+% \newcommand{\name}[1]{%
+%   \centerline{\Huge\scshape{#1}}% 设置个人名字, 使用大号小型大写
+%   \vspace{1.25ex}
+% }
+\newcommand{\name}[1]{%
+  % \vspace{1.25ex}
+  {\LARGE\scshape{#1}}% 设置个人名字, 使用大号小型大写
+  % \vspace{1.25ex}
+}
+
+% Simple name in small caps
+\newcommand{\nameTest}[1]{%
+  {\large\scshape{#1}}% 设置测试用的小型大写名字
+}
+
+% Contact details
+% \newcommand{\email}[1]{\faEnvelope\ \href{mailto:#1}{#1}} % 邮箱
+% \newcommand{\phone}[1]{\faPhone\ {#1}} % 电话号码
+\newcommand{\email}[1]{\href{mailto:#1}{#1}} % 邮箱
+\newcommand{\phone}[1]{{#1}} % 电话号码
+\newcommand{\linkedin}[2][]{\faLinkedin\
+  \ifthenelse{\isempty{#1}}%
+    {\href{#2}{#2}}%
+    {\href{#2}{#1}}} % LinkedIn 链接
+\newcommand{\linkedinsquare}[2][]{\faLinkedinSquare\
+  \ifthenelse{\isempty{#1}}%
+    {\href{#2}{#2}}%
+    {\href{#2}{#1}}} % LinkedIn 方形图标
+\newcommand{\github}[2][]{\faGithub\
+  \ifthenelse{\isempty{#1}}%
+    {\href{#2}{#2}}%
+    {\href{#2}{#1}}} % GitHub 链接
+\newcommand{\homepage}[2][]{\faLink\
+  \ifthenelse{\isempty{#1}}%
+    {\href{#2}{#2}}%
+    {\href{#2}{#1}}} % 个人主页链接
+
+% Basic information section (e.g., name, title, etc.)
+\newcommand{\basicInfo}[1]{%
+  \centerline{\sffamily\large{#1}}% 设置简历基本信息（如职位等）
+  \vspace{1.5ex}
+}
+
+% Role definition
+\newcommand{\role}[2]{%
+  {\par \textit{#1} ~ #2 \par}% 设置个人角色描述
+  \vspace{0.85ex}
+}
+
+\newlength\modparskip
+\newlength\modbaselineskip
+  \def\baselinestretch{1} % this parameter will be redefined at start of 'spacing' environment
+  \setlength\modparskip{\parskip/\real{\baselinestretch}}%
+  \setlength\modbaselineskip{\baselineskip/\real{\baselinestretch}}%
+\makeatletter
+\renewenvironment{spacing}[1]{\par%
+   \def\baselinestretch{#1}%
+   \ifx\@currsize\normalsize\@normalsize\else\@currsize\fi%
+}%
+{\par%
+   \vskip \modparskip%      % originally: \vskip \parskip
+   \vskip \modbaselineskip% % originally: \vskip \baselineskip
+}
+\makeatother
