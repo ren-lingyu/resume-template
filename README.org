@@ -46,4 +46,4 @@
     #+end_src
 
 * 许可
-本项目采用 MIT License, 详见 [[./LICENSE][LICENSE]].
+本项目采用 MIT License, 详见 [[file:LICENSE][LICENSE]].
